@@ -220,7 +220,7 @@ _start:
         mov ebx, 40
         call GetRandom
         call PrintDec
-        add ebp, ebx
+        add edx, ebx
         lea rbx, GetFoodmsg2
         call PrintStr
         inc esi
