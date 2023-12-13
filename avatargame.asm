@@ -139,21 +139,21 @@ Wonmsg: 	.ascii "***************************************************************
 .global _start
 
 _start:
-    mov eax, 1000
-    mov ebp, 100
-    mov ecx, 100
-    mov edx, 30
-    mov esi, 1
+    mov rax, 1000
+    mov rdi, 100
+    mov rcx, 100
+    mov rdx, 30
+    mov rsi, 1
 
     jmp PrintTitle
     
 
     While:
-        cmp eax, 0
+        cmp rax, 0
         jle PrintWon
-        cmp ecx, 0
+        cmp rcx, 0
         jle PrintHealthlost
-        cmp esi, 30
+        cmp rsi, 30
         jg PrintTimeover
         
         mov rbx, 3
@@ -183,31 +183,31 @@ _start:
     Rest:
         lea rbx, Restmsg
         call PrintStr
-        mov ebx, 40
+        mov rbx, 40
         call GetRandom
-        add ebx, 10
+        add rbx, 10
         call PrintDec
-        add ebp, ebx
+        add rdi, rbx
         lea rbx, Restmsg2
         call PrintStr
 
         lea rbx, Restmsg3
         call PrintStr
-        mov ebx, 30
+        mov rbx, 30
         call GetRandom
-        add ebx, 30
+        add rbx, 30
         call PrintDec
-        add ecx, ebx
+        add rcx, rbx
         lea rbx, Restmsg4
         call PrintStr
 
         lea rbx, Restmsg5
         call PrintStr
-        mov ebx, 3
+        mov rbx, 3
         call GetRandom
-        add ebx, 1
+        add rbx, 1
         call PrintDec
-        add esi, ebx
+        add rsi, rbx
         lea rbx, Restmsg6
         call PrintStr
 
@@ -217,40 +217,40 @@ _start:
     GetFood:
         lea rbx, GetFoodmsg
         call PrintStr
-        mov ebx, 40
+        mov rbx, 40
         call GetRandom
         call PrintDec
-        add edx, ebx
+        add rdx, rbx
         lea rbx, GetFoodmsg2
         call PrintStr
-        inc esi
+        inc rsi
 
         jmp Journey
 
 
     Travel:
-        cmp ebp, 0
+        cmp rdi, 0
         jle PrintCantfly
         lea rbx, Travelmsg
         call PrintStr
-        mov ebx, 95
+        mov rbx, 95
         call GetRandom
-        add ebx, 5
+        add rbx, 5
         call PrintDec
-        sub eax, ebx
+        sub rax, rbx
         lea rbx, Travelmsg2
         call PrintStr
 
         lea rbx, Travelmsg3
         call PrintStr
-        mov ebx, 15
+        mov rbx, 15
         call GetRandom
-        add ebx, 10
+        add rbx, 10
         call PrintDec
-        sub ebp, ebx
+        sub rdi, rbx
         lea rbx, Travelmsg4
         call PrintStr
-        inc esi
+        inc rsi
 
         jmp Journey
 
@@ -259,35 +259,35 @@ _start:
     Journey:
         lea rbx, Journeymsg
         call PrintStr
-        mov ebx, esi
-        dec ebx
+        mov rbx, rsi
+        dec rbx
         call PrintDec
         lea rbx, Journeymsg2
         call PrintStr
 
-        cmp edx, 0
+        cmp rdx, 0
         jg EatFood
-        cmp edx, 0
+        cmp rdx, 0
         jle Starve
         
         EatFood:
             lea rbx, Journeymsg3
             call PrintStr
-            mov ebx, 5
+            mov rbx, 5
             call GetRandom
-            add ebx, 5
+            add rbx, 5
             call PrintDec
-            sub edx, ebx
+            sub rdx, rbx
             lea rbx, Journeymsg4
             call PrintStr
 
             lea rbx, Journeymsg5
             call PrintStr
-            mov ebx, 5
+            mov rbx, 5
             call GetRandom
-            add ebx, 5
+            add rbx, 5
             call PrintDec
-            sub ecx, ebx
+            sub rcx, rbx
             lea rbx, Journeymsg6
             call PrintStr
 
@@ -301,11 +301,11 @@ _start:
 
             lea rbx, Journeymsg5
             call PrintStr
-            mov ebx, 10
+            mov rbx, 10
             call GetRandom
-            add ebx, 10
+            add rbx, 10
             call PrintDec
-            sub ecx, ebx
+            sub rcx, rbx
             lea rbx, Journeymsg6
             call PrintStr
 
@@ -336,46 +336,46 @@ _start:
     PrintStatus:
         lea rbx, Distance
         call PrintStr
-        cmp eax, 0
-        mov ebx, 0
-        cmovle eax, ebx
-        mov ebx, eax
+        cmp rax, 0
+        mov rbx, 0
+        cmovle rax, rbx
+        mov rbx, rax
         call PrintDec
         lea rbx, Distance2
         call PrintStr
 
         lea rbx, Appa
         call PrintStr
-        cmp ebp, 0
-        mov ebx, 0
-        cmovle ebp, ebx
-        cmp ebp, 100
-        mov ebx, 100
-        cmovge ebp, ebx
-        mov ebx, ebp
+        cmp rdi, 0
+        mov rbx, 0
+        cmovle rdi, rbx
+        cmp rdi, 100
+        mov rbx, 100
+        cmovge rdi, rbx
+        mov rbx, rdi
         call PrintDec
         lea rbx, Appa2
         call PrintStr
 
         lea rbx, Health
         call PrintStr
-        cmp ecx, 0
-        mov ebx, 0
-        cmovle ecx, ebx
-        cmp ecx, 100
-        mov ebx, 100
-        cmovge ecx, ebx
-        mov ebx, ecx
+        cmp rcx, 0
+        mov rbx, 0
+        cmovle rcx, rbx
+        cmp rcx, 100
+        mov rbx, 100
+        cmovge rcx, rbx
+        mov rbx, rcx
         call PrintDec
         lea rbx, Health2
         call PrintStr
 
         lea rbx, Food
         call PrintStr
-        cmp edx, 0
-        mov ebx, 0
-        cmovle edx, ebx
-        mov ebx, edx
+        cmp rdx, 0
+        mov rbx, 0
+        cmovle rdx, rbx
+        mov rbx, rdx
         call PrintDec
         lea rbx, Food2
         call PrintStr
